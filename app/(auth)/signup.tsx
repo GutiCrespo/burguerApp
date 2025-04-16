@@ -132,21 +132,19 @@ const styles = StyleSheet.create({
   },
   h31: {
     fontSize: 10,
-    justifyContent: "center",
-    alignItems: "center",
     fontFamily: "Montserrat",
     color: "#FFFFFF",
     marginBottom: 5,
     marginTop: 5,
+    textAlign: "center",
   },
   h32: {
     fontSize: 10,
-    justifyContent: "center",
-    alignItems: "center",
     fontFamily: "Montserrat",
     color: "#f9881f",
     marginBottom: 20,
     textDecorationLine: "underline",
+    textAlign: "center",
   },
   field: {
     marginBottom: 25,
