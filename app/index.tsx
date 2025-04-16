@@ -1,5 +1,5 @@
 import { Button } from "@/components/button";
-import { router } from "expo-router";
+import { Link, router } from "expo-router";
 import {
   Text,
   View,
@@ -29,6 +29,9 @@ export default function Screen() {
       />
 
       <Button title="Faça seu Login" onPress={handleLogin} />
+      <Link href={"/(auth)/signup"}>
+        <Text style={styles.h3}> cadastre aqui </Text>
+      </Link>
     </SafeAreaView>
   );
 }
@@ -53,9 +56,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   h2: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: "Montserrat",
     color: "#FFFFFF",
     marginBottom: 0,
+    textAlign: "center",
+  },
+
+  h3: {
+    fontSize: 13,
+    fontFamily: "Montserrat",
+    color: "#FFFFFF",
+    textAlign: "center",
   },
 });
