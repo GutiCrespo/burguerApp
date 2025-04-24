@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   h31: {
-    fontSize: 10,
+    fontSize: 13,
     fontFamily: "Montserrat",
     color: "#FFFFFF",
     marginBottom: 5,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   h32: {
-    fontSize: 10,
+    fontSize: 13,
     fontFamily: "Montserrat",
     color: "#f9881f",
     marginBottom: 20,

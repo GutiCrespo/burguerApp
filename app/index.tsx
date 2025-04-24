@@ -29,6 +29,7 @@ export default function Screen() {
       />
 
       <Button title="Faça seu Login" onPress={handleLogin} />
+
       <Link href={"/(auth)/signup"}>
         <Text style={styles.h3}> cadastre aqui </Text>
       </Link>
@@ -64,7 +65,8 @@ const styles = StyleSheet.create({
   },
 
   h3: {
-    fontSize: 13,
+    marginTop: 20,
+    fontSize: 16,
     fontFamily: "Montserrat",
     color: "#FFFFFF",
     textAlign: "center",
