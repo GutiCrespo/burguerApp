@@ -1,4 +1,4 @@
-import { Button } from "@/components/button";
+import { Button } from "@/app/(components)/button";
 import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -20,7 +20,7 @@ export default function CadastroCliente() {
       return;
     }
 
-    router.navigate("/menu");
+    router.navigate("/(tabs)/home");
   };
 
   return (

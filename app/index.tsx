@@ -1,4 +1,4 @@
-import { Button } from "@/components/button";
+import { Button } from "@/app/(components)/button";
 import { Link, router } from "expo-router";
 import {
   Text,
@@ -16,7 +16,9 @@ export default function Screen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.h1}>CompiLanche</Text>
+      <View style={{ width: "100%", alignItems: "center" }}>
+        <Text style={styles.h2}>CompiLanche</Text>
+      </View>
       <Text style={styles.h2}>
         A primeira hamburgueria virtual que você faz o pedido online e come o
         burger através do computador.
@@ -55,6 +57,8 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontFamily: "calistoga",
     marginBottom: 10,
+    textAlign: "center",
+    alignSelf: "center",
   },
   h2: {
     fontSize: 16,
