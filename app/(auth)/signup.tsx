@@ -42,11 +42,11 @@ export default function CadastroCliente() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
-        <H1>CompLanche</H1>
-        <H2>Crie sua conta</H2>
-        <Text style={styles.h3}>
-          Olá, adicione suas informações para fazermos seu primeiro pedido!
-        </Text>
+        <H1>CompiLanche</H1>
+        <H2>
+          Configure seu perfil e instale o apetite. O CompLanche vai compilar
+          seu lanche ideal!
+        </H2>
 
         <View style={styles.field}>
           <Text style={styles.label}>Nome</Text>
@@ -121,19 +121,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "100%",
   },
-  h1: {
-    fontSize: 44,
-    fontWeight: "bold",
-    color: "#FFFFFF",
-    fontFamily: "calistoga",
-    marginBottom: 10,
-  },
-  h2: {
-    fontSize: 20,
-    fontFamily: "Montserrat",
-    color: "#FFFFFF",
-    marginBottom: 20,
-  },
+
   h3: {
     fontSize: 13,
     fontFamily: "Montserrat",

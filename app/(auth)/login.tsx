@@ -42,7 +42,10 @@ export default function Login() {
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
         <H1>Bem vindo de volta!</H1>
-        <H2>Acesse a sua conta para escolher a sua janta de hoje.</H2>
+        <H2>
+          Hora de logar no universo dos lanches! Adicione seus dados e faça o
+          deploy do seu pedido
+        </H2>
 
         <View style={styles.field}>
           <Text style={styles.label}>Telefone</Text>
