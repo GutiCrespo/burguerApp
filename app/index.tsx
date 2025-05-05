@@ -1,28 +1,23 @@
-import { Button } from "@/app/(components)/button";
+import { Button } from "@/components/button";
 import { Link, router } from "expo-router";
-import {
-  Text,
-  View,
-  Pressable,
-  StyleSheet,
-  SafeAreaView,
-  Image,
-} from "react-native";
+import H1 from "@/components/H1";
+import H2 from "@/components/H2";
+import { Text, View, StyleSheet, SafeAreaView, Image } from "react-native";
 
 export default function Screen() {
   const handleLogin = () => {
-    router.navigate("./login");
+    router.push("/(auth)/login");
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ width: "100%", alignItems: "center" }}>
-        <Text style={styles.h2}>CompiLanche</Text>
+        <H1>CompiLanche</H1>
       </View>
-      <Text style={styles.h2}>
+      <H2>
         A primeira hamburgueria virtual que você faz o pedido online e come o
         burger através do computador.
-      </Text>
+      </H2>
 
       <Image
         source={require("../assets/images/heroBurger.png")}
@@ -38,6 +33,7 @@ export default function Screen() {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -51,23 +47,6 @@ const styles = StyleSheet.create({
     height: 300,
     marginBottom: 20,
   },
-  h1: {
-    fontSize: 44,
-    fontWeight: "bold",
-    color: "#FFFFFF",
-    fontFamily: "calistoga",
-    marginBottom: 10,
-    textAlign: "center",
-    alignSelf: "center",
-  },
-  h2: {
-    fontSize: 16,
-    fontFamily: "Montserrat",
-    color: "#FFFFFF",
-    marginBottom: 0,
-    textAlign: "center",
-  },
-
   h3: {
     marginTop: 20,
     fontSize: 16,

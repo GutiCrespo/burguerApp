@@ -1,4 +1,6 @@
-import { Button } from "@/app/(components)/button";
+import { Button } from "@/components/button";
+import H1 from "@/components/H1";
+import H2 from "@/components/H2";
 import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -21,9 +23,16 @@ export default function CadastroCliente() {
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
-
+    if (!/^\d{10,11}$/.test(telefone)) {
+      Alert.alert("Erro", "Digite um telefone válido com DDD.");
+      return;
+    }
     if (senha !== confirmarSenha) {
       Alert.alert("Erro", "As senhas não coincidem.");
+      return;
+    }
+    if (senha.length < 6) {
+      Alert.alert("Erro", "A senha deve ter pelo menos 6 caracteres.");
       return;
     }
 
@@ -33,8 +42,8 @@ export default function CadastroCliente() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
-        <Text style={styles.h1}>CompLanche</Text>
-        <Text style={styles.h2}>Crie sua conta</Text>
+        <H1>CompLanche</H1>
+        <H2>Crie sua conta</H2>
         <Text style={styles.h3}>
           Olá, adicione suas informações para fazermos seu primeiro pedido!
         </Text>
@@ -85,11 +94,14 @@ export default function CadastroCliente() {
             onChangeText={setConfirmarSenha}
           />
         </View>
+
         <Button title="Criar Conta" onPress={handleCadastro} />
         <Text style={styles.h31}>Já possui cadastro?</Text>
-        <Link href={"/(auth)/login"}>
-          <Text style={styles.h32}>Acesse sua conta. </Text>
-        </Link>
+        <View style={{ alignItems: "center" }}>
+          <Link href={"/(auth)/login"}>
+            <Text style={styles.h32}>Acesse sua conta. </Text>
+          </Link>
+        </View>
       </View>
     </SafeAreaView>
   );

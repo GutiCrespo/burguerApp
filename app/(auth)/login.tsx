@@ -1,4 +1,6 @@
-import { Button } from "@/app/(components)/button";
+import { Button } from "@/components/button";
+import H1 from "@/components/H1";
+import H2 from "@/components/H2";
 import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -10,7 +12,11 @@ import {
   Alert,
 } from "react-native";
 
-export default function CadastroCliente() {
+export const options = {
+  headerShown: false,
+};
+
+export default function Login() {
   const [telefone, setTelefone] = useState("");
   const [senha, setSenha] = useState("");
 
@@ -20,16 +26,23 @@ export default function CadastroCliente() {
       return;
     }
 
+    if (!/^\d{10,11}$/.test(telefone)) {
+      Alert.alert("Erro", "Digite um telefone válido com DDD.");
+      return;
+    }
+
+    if (senha.length < 6) {
+      Alert.alert("Erro", "A senha deve ter pelo menos 6 caracteres.");
+      return;
+    }
     router.navigate("/(tabs)/home");
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
-        <Text style={styles.h1}>Bem vindo de volta!</Text>
-        <Text style={styles.h2}>
-          Acesse a sua conta para escolher a sua janta de hoje.
-        </Text>
+        <H1>Bem vindo de volta!</H1>
+        <H2>Acesse a sua conta para escolher a sua janta de hoje.</H2>
 
         <View style={styles.field}>
           <Text style={styles.label}>Telefone</Text>
@@ -57,9 +70,11 @@ export default function CadastroCliente() {
 
         <Button title="Acessar conta" onPress={handleLogin} />
         <Text style={styles.h31}>Não possui conta ainda?</Text>
-        <Link href={"/(auth)/signup"}>
-          <Text style={styles.h32}>Faça seu cadastro </Text>
-        </Link>
+        <View style={{ alignItems: "center" }}>
+          <Link href={"/(auth)/signup"}>
+            <Text style={styles.h32}>Faça seu cadastro</Text>
+          </Link>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -79,27 +94,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "100%",
   },
-  h1: {
-    fontSize: 44,
-    fontWeight: "bold",
-    color: "#FFFFFF",
-    fontFamily: "calistoga",
-    marginBottom: 10,
-  },
-  h2: {
-    fontSize: 20,
-    fontFamily: "Montserrat",
-    color: "#FFFFFF",
-    marginBottom: 20,
-  },
 
-  h3: {
-    fontSize: 10,
-    fontFamily: "Montserrat",
-    color: "#FFFFFF",
-    marginBottom: 20,
-    marginTop: 5,
-  },
   h31: {
     fontSize: 13,
     fontFamily: "Montserrat",

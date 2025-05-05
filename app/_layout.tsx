@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import "../global.css";
+import "../global.css"; // ou remova se não usa web
 
 export default function RootLayout() {
   return (
@@ -9,18 +9,15 @@ export default function RootLayout() {
         headerTitleAlign: "center",
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Home" }} />
+      <Stack.Screen name="index" options={{ title: "Início" }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
-        name="about"
-        options={{ title: "Sobre", headerShown: true }}
+        name="(auth)/login"
+        options={{ title: "Logar", headerShown: false }}
       />
       <Stack.Screen
-        name="login"
-        options={{ title: "Logar", headerShown: true }}
-      />
-      <Stack.Screen
-        name="signup"
-        options={{ title: "Cadastro", headerShown: true }}
+        name="(auth)/signup"
+        options={{ title: "Cadastro", headerShown: false }}
       />
     </Stack>
   );

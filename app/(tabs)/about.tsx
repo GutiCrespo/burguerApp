@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 export default function About() {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Sobre o CompLanche</Text>
+      <Text style={styles.title}>Sobre o CompiLanche</Text>
 
       <Text style={styles.text}>
         O <Text style={styles.highlight}>CompLanche</Text> é um aplicativo
@@ -22,11 +22,11 @@ export default function About() {
 
       <Text style={styles.text}>
         Inspirado por interfaces modernas e com foco na experiência do usuário,
-        o CompLanche foi desenvolvido com React Native e segue boas práticas de
+        o CompiLanche foi desenvolvido com React Native e segue boas práticas de
         design e usabilidade.
       </Text>
 
-      <Text style={styles.footer}>© 2025 CompLanche • UniSenac</Text>
+      <Text style={styles.footer}>© 2025 CompiLanche • UniSenac</Text>
     </ScrollView>
   );
 }

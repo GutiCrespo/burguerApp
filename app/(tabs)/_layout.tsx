@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { FontAwesome } from "@expo/vector-icons/";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function TabLayout() {
   return (
@@ -11,29 +11,20 @@ export default function TabLayout() {
         },
         tabBarActiveTintColor: "#F9881F",
         tabBarInactiveTintColor: "#ccc",
-        headerShown: false, // remove o header em todas as telas
+        headerShown: false,
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="home" color={color} />
+            <FontAwesome name="home" size={28} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="Menu"
-        options={{
-          title: "Menu",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="archive" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="About"
+        name="about"
         options={{
           title: "Sobre",
           tabBarIcon: ({ color }) => (

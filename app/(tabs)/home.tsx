@@ -1,4 +1,6 @@
 import { Burguer } from "@/types/burguer";
+import H1 from "@/components/H1";
+import H2 from "@/components/H2";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 
@@ -7,7 +9,7 @@ export default function Menu() {
 
   const getBurguers = async () => {
     try {
-      const response = await fetch("http://192.168.1.14:3004/burguers"); // o React Native não aceita o localhost direto tem que ser o indereço do IP
+      const response = await fetch("http://192.168.1.14:3004/burguers");
       const json = await response.json();
       if (Array.isArray(json)) {
         setBurguers(json);
@@ -27,11 +29,11 @@ export default function Menu() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.h1}>CompiLanche</Text>
-      <Text style={styles.h2}>
+      <H1>CompiLanche</H1>
+      <H2>
         Sistema autenticado, agora é só debugar a fome e rodar seu combo
         favorito!
-      </Text>
+      </H2>
 
       <ScrollView>
         {burguers.map((burguer) => (
@@ -53,22 +55,6 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#121212", // fundo dark
     justifyContent: "center",
-  },
-  h1: {
-    fontSize: 44,
-    fontWeight: "bold",
-    color: "#FFFFFF",
-    fontFamily: "calistoga",
-    marginBottom: 10,
-    justifyContent: "center",
-    textAlign: "center",
-  },
-  h2: {
-    fontSize: 16,
-    fontFamily: "Montserrat",
-    color: "#FFFFFF",
-    marginBottom: 20,
-    textAlign: "center",
   },
 
   burguerItem: {
