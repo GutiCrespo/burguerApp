@@ -9,7 +9,7 @@ export default function Menu() {
 
   const getBurguers = async () => {
     try {
-      const response = await fetch("http://192.168.1.14:3004/burguers");
+      const response = await fetch("http://10.1.143.13:3004/burguers");
       const json = await response.json();
       if (Array.isArray(json)) {
         setBurguers(json);
