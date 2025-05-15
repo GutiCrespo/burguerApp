@@ -37,7 +37,7 @@ export default function ForgotPassword() {
     );
 
     // Redireciona de volta ao login
-    router.replace("/(auth)/login");
+    router.replace("/(auth)/validationCode");
   };
 
   return (
