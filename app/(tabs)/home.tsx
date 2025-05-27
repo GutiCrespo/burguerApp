@@ -52,7 +52,7 @@ export default function Menu() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 30,
     backgroundColor: "#121212", // fundo dark
     justifyContent: "center",
   },
