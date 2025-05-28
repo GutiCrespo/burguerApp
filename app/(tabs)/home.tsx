@@ -9,14 +9,18 @@ export default function Menu() {
 
   const getBurguers = async () => {
     try {
-      const response = await fetch("http://192.168.1.14:3004/burguers");
+      const response = await fetch(
+        "https://burguer-app-api.vercel.app/burguers"
+      );
       const json = await response.json();
+      console.log("Resposta da API:", json);
+
       if (Array.isArray(json)) {
         setBurguers(json);
       } else if (json.burguers) {
         setBurguers(json.burguers);
       } else {
-        console.warn("Resposta inesperada da API:", json);
+        console.warn("Formato inesperado:", json);
       }
     } catch (error) {
       console.error("Erro ao buscar burguers:", error);
