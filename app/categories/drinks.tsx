@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#00C1D4",
+    color: "#F9881F",
     marginTop: 8,
   },
   photo: {

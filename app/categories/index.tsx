@@ -17,7 +17,7 @@ export default function Categories() {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.push("/categories/bebidas")}
+        onPress={() => router.push("/categories/drinks")}
       >
         <Text style={styles.buttonText}>Bebidas</Text>
       </TouchableOpacity>

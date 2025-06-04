@@ -31,7 +31,7 @@ export default function TabLayout() {
         options={{
           title: "Categorias",
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="cutlery" size={24} color={color} />
+            <FontAwesome name="home" size={24} color={color} />
           ),
         }}
       />
