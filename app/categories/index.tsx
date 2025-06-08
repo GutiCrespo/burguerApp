@@ -1,12 +1,13 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import H1 from "@/components/H1";
 
 export default function Categories() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Categorias</Text>
+      <H1>Categorias</H1>
 
       <TouchableOpacity
         style={styles.button}

@@ -14,7 +14,6 @@ export default function TabLayout() {
         headerShown: false,
       }}
     >
-      {/* 1º: Home */}
       <Tabs.Screen
         name="home"
         options={{
@@ -25,18 +24,16 @@ export default function TabLayout() {
         }}
       />
 
-      {/* 2º: Categorias */}
       <Tabs.Screen
-        name="categories"
+        name="categorias"
         options={{
           title: "Categorias",
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="home" size={24} color={color} />
+            <FontAwesome name="tags" size={24} color={color} />
           ),
         }}
       />
 
-      {/* 3º: Sobre */}
       <Tabs.Screen
         name="about"
         options={{

@@ -1,1 +1,0 @@
-Tivemos problema com nosso Banco de dados, criada uma nova instância para porta 3307.

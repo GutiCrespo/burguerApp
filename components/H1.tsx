@@ -10,6 +10,7 @@ export default function H1({ style, ...props }: TextProps) {
           color: "#FFFFFF",
           fontFamily: "calistoga",
           marginBottom: 10,
+          marginTop: 15,
           textAlign: "center",
         },
         style,
