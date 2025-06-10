@@ -3,8 +3,15 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Button } from "@/components/button";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function ProductDetail() {
-  const { name, photo, price } = useLocalSearchParams();
+export default function ComboDetail() {
+  const {
+    burguerName,
+    burguerPhoto,
+    batataName,
+    drinkName,
+    drinkPhoto,
+    totalPrice,
+  } = useLocalSearchParams();
   const router = useRouter();
 
   return (
@@ -14,13 +21,20 @@ export default function ProductDetail() {
         <Text style={styles.backText}>Voltar</Text>
       </TouchableOpacity>
 
-      <Image source={{ uri: photo as string }} style={styles.image} />
+      <Image source={{ uri: burguerPhoto as string }} style={styles.image} />
 
-      <Text style={styles.title}>{name}</Text>
-      <Text style={styles.description}>Deploy de sabor instantâneo!</Text>
-      <Text style={styles.price}>R$ {Number(price).toFixed(2)}</Text>
+      <Text style={styles.title}>
+        {burguerName} + {drinkName}
+      </Text>
+      <Text style={styles.subtitle}>+ {batataName}</Text>
 
-      <Button title="Comprar" onPress={() => alert("Produto comprado!")} />
+      <Text style={styles.description}>
+        Um combo turbinado para manter seu sistema rodando liso!
+      </Text>
+
+      <Text style={styles.price}>R$ {Number(totalPrice).toFixed(2)}</Text>
+
+      <Button title="Comprar Combo" onPress={() => alert("Combo comprado!")} />
     </View>
   );
 }
@@ -51,9 +65,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     color: "#fff",
     fontWeight: "bold",
+    textAlign: "center",
+  },
+  subtitle: {
+    fontSize: 18,
+    color: "#ccc",
     marginBottom: 8,
     textAlign: "center",
   },

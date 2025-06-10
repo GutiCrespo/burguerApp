@@ -1,4 +1,4 @@
-export type Side = {
+export type Combo = {
   id: string;
   name: string;
   price: number;

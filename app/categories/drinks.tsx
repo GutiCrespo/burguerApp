@@ -1,11 +1,21 @@
-import { Drink } from "@/types/drink"; // Crie esse tipo se ainda não existir
+import { Burguer } from "@/types/burguer"; // Pode ser renomeado futuramente para um tipo mais genérico
 import H1 from "@/components/H1";
 import H2 from "@/components/H2";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import { useRouter } from "expo-router";
 
-export default function Drinks() {
-  const [drinks, setDrinks] = useState<Drink[]>([]);
+export default function DrinksMenu() {
+  const [drinks, setDrinks] = useState<Burguer[]>([]);
+  const router = useRouter();
 
   const getDrinks = async () => {
     try {
@@ -31,17 +41,34 @@ export default function Drinks() {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+        <Ionicons name="arrow-back" size={24} color="#F9881F" />
+        <Text style={styles.backText}>Voltar</Text>
+      </TouchableOpacity>
       <H1>Drinks</H1>
-      <H2>Escolha a bebida perfeita para acompanhar o seu combo tech!</H2>
+      <H2>Escolha a bebida perfeita para acompanhar seu pedido!</H2>
 
       <ScrollView>
         {drinks.map((drink) => (
-          <View key={drink.id} style={styles.drinkItem}>
+          <TouchableOpacity
+            key={drink.id}
+            style={styles.burguerItem}
+            onPress={() =>
+              router.push({
+                pathname: "/product-detail",
+                params: {
+                  name: drink.name,
+                  photo: drink.photo,
+                  price: String(drink.price),
+                },
+              })
+            }
+          >
             <Image source={{ uri: drink.photo }} style={styles.photo} />
             <Text style={styles.name}>{drink.name}</Text>
-            <Text style={styles.info}>{drink.description}</Text>
+            <Text style={styles.info}>{drink.information}</Text>
             <Text style={styles.price}>R$ {drink.price.toFixed(2)}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>
@@ -55,11 +82,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#121212",
     justifyContent: "center",
   },
-  drinkItem: {
+  burguerItem: {
     marginBottom: 16,
     padding: 16,
     backgroundColor: "#1e1e1e",
     borderRadius: 10,
+  },
+  backButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-start",
+    marginTop: 15,
+    marginBottom: 16,
+  },
+  backText: {
+    color: "#fff",
+    fontSize: 16,
+    marginLeft: 8,
   },
   name: {
     fontSize: 20,
