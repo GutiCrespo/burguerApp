@@ -1,40 +1,39 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Button } from "@/components/button";
-import { Ionicons } from "@expo/vector-icons";
 
 export default function ComboDetail() {
+  const router = useRouter();
   const {
     burguerName,
     burguerPhoto,
-    batataName,
     drinkName,
     drinkPhoto,
+    batataName,
+    batataPhoto,
     totalPrice,
   } = useLocalSearchParams();
-  const router = useRouter();
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#F9881F" />
-        <Text style={styles.backText}>Voltar</Text>
+        <Text style={styles.backText}>← Voltar</Text>
       </TouchableOpacity>
 
+      <Text style={styles.title}>Combo Selecionado</Text>
+
       <Image source={{ uri: burguerPhoto as string }} style={styles.image} />
+      <Text style={styles.itemText}>{burguerName}</Text>
 
-      <Text style={styles.title}>
-        {burguerName} + {drinkName}
-      </Text>
-      <Text style={styles.subtitle}>+ {batataName}</Text>
+      <Image source={{ uri: batataPhoto as string }} style={styles.image} />
+      <Text style={styles.itemText}>{batataName}</Text>
 
-      <Text style={styles.description}>
-        Um combo turbinado para manter seu sistema rodando liso!
-      </Text>
+      <Image source={{ uri: drinkPhoto as string }} style={styles.image} />
+      <Text style={styles.itemText}>{drinkName}</Text>
 
-      <Text style={styles.price}>R$ {Number(totalPrice).toFixed(2)}</Text>
+      <Text style={styles.price}>Total: R$ {totalPrice} (15% OFF)</Text>
 
-      <Button title="Comprar Combo" onPress={() => alert("Combo comprado!")} />
+      <Button title="Comprar" onPress={() => alert("Produto comprado!")} />
     </View>
   );
 }
@@ -42,50 +41,50 @@ export default function ComboDetail() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
     backgroundColor: "#121212",
+    padding: 20,
     alignItems: "center",
   },
   backButton: {
-    flexDirection: "row",
-    alignItems: "center",
     alignSelf: "flex-start",
-    marginTop: 15,
     marginBottom: 16,
+    marginTop: 16,
   },
   backText: {
     color: "#F9881F",
     fontSize: 16,
-    marginLeft: 8,
-  },
-  image: {
-    width: 250,
-    height: 180,
-    borderRadius: 12,
-    marginBottom: 20,
   },
   title: {
-    fontSize: 22,
+    fontSize: 24,
     color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
+    marginBottom: 20,
   },
-  subtitle: {
-    fontSize: 18,
-    color: "#ccc",
-    marginBottom: 8,
-    textAlign: "center",
-  },
-  description: {
+  itemText: {
+    color: "#fff",
     fontSize: 16,
-    color: "#ccc",
+    marginTop: 4,
     marginBottom: 12,
-    textAlign: "center",
   },
   price: {
-    fontSize: 20,
-    color: "#F9881F",
+    fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 24,
+    color: "#F9881F",
+    marginVertical: 20,
+  },
+  image: {
+    width: 120,
+    height: 100,
+    borderRadius: 10,
+  },
+  button: {
+    backgroundColor: "#F9881F",
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: "#121212",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });

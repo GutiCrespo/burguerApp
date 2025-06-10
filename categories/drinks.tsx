@@ -12,10 +12,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { Drink } from "@/types/drink";
 
 export default function DrinksMenu() {
-  const [drinks, setDrinks] = useState<Drink[]>([]);
+  const [drinks, setDrinks] = useState<Burguer[]>([]);
   const router = useRouter();
 
   const getDrinks = async () => {
@@ -67,7 +66,7 @@ export default function DrinksMenu() {
           >
             <Image source={{ uri: drink.photo }} style={styles.photo} />
             <Text style={styles.name}>{drink.name}</Text>
-            <Text style={styles.info}>{drink.description}</Text>
+            <Text style={styles.info}>{drink.information}</Text>
             <Text style={styles.price}>R$ {drink.price.toFixed(2)}</Text>
           </TouchableOpacity>
         ))}

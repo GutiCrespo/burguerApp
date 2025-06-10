@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
 import H1 from "@/components/H1";
 import H2 from "@/components/H2";
+import { Ionicons } from "@expo/vector-icons";
 import {
   View,
   Text,
@@ -112,24 +112,7 @@ export default function Combos() {
       <H2>A combinação perfeita para seu pedido!</H2>
 
       {combos.map((combo, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.card}
-          onPress={() =>
-            router.push({
-              pathname: "/combo-detail",
-              params: {
-                burguerName: combo.burguer.name,
-                burguerPhoto: combo.burguer.photo,
-                drinkName: combo.drink.name,
-                drinkPhoto: combo.drink.photo,
-                batataName: combo.batata.name,
-                batataPhoto: combo.batata.photo,
-                totalPrice: combo.totalPrice.toFixed(2),
-              },
-            })
-          }
-        >
+        <View key={index} style={styles.card}>
           <Text style={styles.comboTitle}>
             {combo.burguer.name} + {combo.batata.name} + {combo.drink.name}
           </Text>
@@ -141,7 +124,7 @@ export default function Combos() {
           <Text style={styles.price}>
             R$ {combo.totalPrice.toFixed(2)} (15% OFF)
           </Text>
-        </TouchableOpacity>
+        </View>
       ))}
     </ScrollView>
   );
@@ -152,6 +135,17 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#121212",
   },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#bbb",
+    marginBottom: 20,
+  },
   backText: {
     color: "#F9881F",
     fontSize: 16,
@@ -161,8 +155,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "flex-start",
-    marginTop: 16,
+    marginTop: 15,
     marginBottom: 16,
+  },
+  burguerItem: {
+    marginBottom: 16,
+    padding: 16,
+    backgroundColor: "#1e1e1e",
+    borderRadius: 10,
   },
   card: {
     backgroundColor: "#1e1e1e",
