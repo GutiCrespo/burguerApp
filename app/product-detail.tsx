@@ -164,8 +164,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   mainPhoto: {
-    width: "100%",
-    height: 250,
+    width: 340,
+    height: 280,
     borderRadius: 10,
     resizeMode: "cover",
   },
