@@ -14,7 +14,7 @@ export default function Screen() {
       <View style={{ width: "100%", alignItems: "center" }}>
         <H1>CompiLanche</H1>
       </View>
-      <H2>
+      <H2 style={styles.h2}>
         A primeira hamburgueria virtual que você faz o pedido online e come o
         burger através do computador.
       </H2>
@@ -27,9 +27,12 @@ export default function Screen() {
 
       <Button title="Faça seu Login" onPress={handleLogin} />
 
-      <Link href={"/(auth)/signup"}>
+      {/* <Link href={"/(auth)/signup"}>
         <Text style={styles.h3}> cadastre aqui </Text>
-      </Link>
+      </Link> */}
+
+      <Button title="Cadastre aqui" variant="letters" onPress={() => router.push("/(auth)/signup")} />
+
     </SafeAreaView>
   );
 }
@@ -54,4 +57,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     textAlign: "center",
   },
+  h2: {
+    width: '80%'
+  }
 });

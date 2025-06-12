@@ -70,9 +70,24 @@ export default function Login() {
             onChangeText={setSenha}
           />
           <View>
-            <Link href={"/(auth)/forgotPassword"}>
+            {/* <Link href={"/(auth)/forgotPassword"}>
               <Text style={styles.h32}>Esqueceu sua senha</Text>
-            </Link>
+            </Link> */}
+            
+          <Button
+            title="Esqueceu sua senha"
+            variant="letters"
+            onPress={() => router.push("/(auth)/forgotPassword")}
+            textStyle={{
+              fontSize: 13,
+              fontFamily: "Montserrat",
+              color: "#f9881f",
+              marginBottom: 20,
+              textDecorationLine: "underline",
+              textAlign: "center",
+            }}
+          />
+
           </View>
         </View>
 
