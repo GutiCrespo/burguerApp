@@ -23,7 +23,6 @@ export default function TabLayout() {
           ),
         }}
       />
-
       <Tabs.Screen
         name="categorias"
         options={{
@@ -33,7 +32,15 @@ export default function TabLayout() {
           ),
         }}
       />
-
+      <Tabs.Screen
+        name="cart"
+        options={{
+          title: "Carrinho",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="shopping-cart" size={24} color={color} />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="about"
         options={{

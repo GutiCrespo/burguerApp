@@ -10,30 +10,34 @@ import {
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { useCart } from "../../context/CartContext";
 
-type Item = {
+type ProductItem = {
   id: number;
   name: string;
   price: number;
   photo: string;
   information: string;
+  description?: string;
 };
 
 type Combo = {
-  burguer: Item;
-  batata: Item;
-  drink: Item;
+  id: string;
+  name: string;
+  burguer: ProductItem;
+  batata: ProductItem;
+  drink: ProductItem;
   totalPrice: number;
 };
 
 export default function Combos() {
-  const [burguers, setBurguers] = useState<Item[]>([]);
-  const [drinks, setDrinks] = useState<Item[]>([]);
   const [combos, setCombos] = useState<Combo[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     async function fetchData() {
@@ -41,20 +45,21 @@ export default function Combos() {
         const burguersResponse = await fetch(
           "https://burguer-app-api.vercel.app/burguers"
         );
-        const burguersData: Item[] = await burguersResponse.json();
+        const burguersData: ProductItem[] = await burguersResponse.json();
 
         const drinksResponse = await fetch(
           "https://burguer-app-api.vercel.app/drinks"
         );
-        const drinksData: Item[] = await drinksResponse.json();
+        const drinksData: ProductItem[] = await drinksResponse.json();
 
+        // Encontra a batata "Byte Fries"
         const batata = burguersData.find((item) => item.name === "Byte Fries");
         const burguersFiltered = burguersData.filter(
           (item) => item.name !== "Byte Fries"
         );
 
         if (!batata) {
-          console.warn("Batata não encontrada!");
+          console.warn("Batata 'Byte Fries' não encontrada!");
           setLoading(false);
           return;
         }
@@ -62,11 +67,16 @@ export default function Combos() {
         const newCombos: Combo[] = [];
         for (const burguer of burguersFiltered) {
           for (const drink of drinksData) {
+            const comboId = `combo-${burguer.id}-${batata.id}-${drink.id}`;
+            const comboName = `${burguer.name} + ${batata.name} + ${drink.name}`;
+
             newCombos.push({
+              id: comboId,
+              name: comboName,
               burguer,
               batata,
               drink,
-              totalPrice: (burguer.price + batata.price + drink.price) * 0.85,
+              totalPrice: (burguer.price + batata.price + drink.price) * 0.85, // 15% de desconto
             });
           }
         }
@@ -74,6 +84,10 @@ export default function Combos() {
         setCombos(newCombos);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
+        Alert.alert(
+          "Erro",
+          "Não foi possível carregar os combos. Tente novamente mais tarde."
+        );
       } finally {
         setLoading(false);
       }
@@ -81,6 +95,12 @@ export default function Combos() {
 
     fetchData();
   }, []);
+
+  const handleAddToCart = (combo: Combo) => {
+    addToCart(combo);
+    Alert.alert("Sucesso", `${combo.name} adicionado ao carrinho!`);
+    router.push("/cart");
+  };
 
   if (loading) {
     return (
@@ -107,32 +127,15 @@ export default function Combos() {
         <Ionicons name="arrow-back" size={24} color="#F9881F" />
         <Text style={styles.backText}>Voltar</Text>
       </TouchableOpacity>
-
       <H1>Combos</H1>
       <H2>A combinação perfeita para seu pedido!</H2>
-
-      {combos.map((combo, index) => (
+      {combos.map((combo) => (
         <TouchableOpacity
-          key={index}
+          key={combo.id}
           style={styles.card}
-          onPress={() =>
-            router.push({
-              pathname: "/combo-detail",
-              params: {
-                burguerName: combo.burguer.name,
-                burguerPhoto: combo.burguer.photo,
-                drinkName: combo.drink.name,
-                drinkPhoto: combo.drink.photo,
-                batataName: combo.batata.name,
-                batataPhoto: combo.batata.photo,
-                totalPrice: combo.totalPrice.toFixed(2),
-              },
-            })
-          }
+          onPress={() => handleAddToCart(combo)}
         >
-          <Text style={styles.comboTitle}>
-            {combo.burguer.name} + {combo.batata.name} + {combo.drink.name}
-          </Text>
+          <Text style={styles.comboTitle}>{combo.name}</Text>
           <View style={styles.imagesRow}>
             <Image source={{ uri: combo.burguer.photo }} style={styles.image} />
             <Image source={{ uri: combo.batata.photo }} style={styles.image} />
@@ -143,6 +146,7 @@ export default function Combos() {
           </Text>
         </TouchableOpacity>
       ))}
+      <View style={{ height: 50 }} />{" "}
     </ScrollView>
   );
 }

@@ -2,7 +2,6 @@ import { Burguer } from "@/types/burguer";
 import { Drink } from "@/types/drink";
 import H1 from "@/components/H1";
 import H2 from "@/components/H2";
-import { Button } from "@/components/button";
 import { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -90,9 +89,8 @@ export default function Menu() {
               router.push({
                 pathname: "/product-detail",
                 params: {
-                  name: burguer.name,
-                  photo: burguer.photo,
-                  price: String(burguer.price),
+                  type: "burguer",
+                  item: JSON.stringify(burguer),
                 },
               })
             }
@@ -120,9 +118,8 @@ export default function Menu() {
               router.push({
                 pathname: "/product-detail",
                 params: {
-                  name: drink.name,
-                  photo: drink.photo,
-                  price: String(drink.price),
+                  type: "drink",
+                  item: JSON.stringify(drink),
                 },
               })
             }
