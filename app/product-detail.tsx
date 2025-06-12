@@ -32,6 +32,9 @@ export default function ProductDetailScreen() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log("Parametros recebeidos:", params);
+    
+
     if (params.item && typeof params.item === "string" && params.type) {
       try {
         const item: ProductItem = JSON.parse(params.item);
@@ -52,7 +55,7 @@ export default function ProductDetailScreen() {
       router.back();
     }
     setLoading(false);
-  }, [params]);
+  }, []);
 
   const handleAddToCart = () => {
     if (!mainItem) {
