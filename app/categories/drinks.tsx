@@ -49,23 +49,29 @@ export default function DrinksMenu() {
       <H1>Drinks</H1>
       <H2>Escolha a bebida perfeita para acompanhar seu pedido!</H2>
 
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Text style={styles.sectionTitle}>Bebidas</Text>
         {drinks.map((drink) => (
           <TouchableOpacity
-            key={drink.id}
-            style={styles.burguerItem}
+            key={`drink-${drink.id}`}
+            style={styles.item}
             onPress={() =>
               router.push({
                 pathname: "/product-detail",
                 params: {
-                  name: drink.name,
-                  photo: drink.photo,
-                  price: String(drink.price),
+                  type: "drink",
+                  item: JSON.stringify(drink),
                 },
               })
             }
           >
-            <Image source={{ uri: drink.photo }} style={styles.photo} />
+            <Image
+              source={{ uri: drink.photo }}
+              style={styles.photo}
+              onError={(e) =>
+                console.log("Erro ao carregar imagem:", e.nativeEvent.error)
+              }
+            />
             <Text style={styles.name}>{drink.name}</Text>
             <Text style={styles.info}>{drink.description}</Text>
             <Text style={styles.price}>R$ {drink.price.toFixed(2)}</Text>
@@ -85,6 +91,22 @@ const styles = StyleSheet.create({
   },
   burguerItem: {
     marginBottom: 16,
+    padding: 16,
+    backgroundColor: "#1e1e1e",
+    borderRadius: 10,
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  scrollContent: {
+    paddingBottom: 20,
+  },
+  item: {
+    marginBottom: 25,
     padding: 16,
     backgroundColor: "#1e1e1e",
     borderRadius: 10,

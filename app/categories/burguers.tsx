@@ -53,23 +53,30 @@ export default function Menu() {
         Agora é só rodar o script da fome e escolher seu Burguer favorito.
       </H2>
 
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        {/* Seção de Burgers */}
+        <Text style={styles.sectionTitle}>Burgers</Text>
         {burguers.map((burguer) => (
           <TouchableOpacity
-            key={burguer.id}
-            style={styles.burguerItem}
+            key={`burger-${burguer.id}`}
+            style={styles.item}
             onPress={() =>
               router.push({
                 pathname: "/product-detail",
                 params: {
-                  name: burguer.name,
-                  photo: burguer.photo,
-                  price: String(burguer.price),
+                  type: "burguer",
+                  item: JSON.stringify(burguer),
                 },
               })
             }
           >
-            <Image source={{ uri: burguer.photo }} style={styles.photo} />
+            <Image
+              source={{ uri: burguer.photo }}
+              style={styles.photo}
+              onError={(e) =>
+                console.log("Erro ao carregar imagem:", e.nativeEvent.error)
+              }
+            />
             <Text style={styles.name}>{burguer.name}</Text>
             <Text style={styles.info}>{burguer.information}</Text>
             <Text style={styles.price}>R$ {burguer.price.toFixed(2)}</Text>
@@ -86,6 +93,22 @@ const styles = StyleSheet.create({
     padding: 30,
     backgroundColor: "#121212",
     justifyContent: "center",
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  scrollContent: {
+    paddingBottom: 20,
+  },
+  item: {
+    marginBottom: 25,
+    padding: 16,
+    backgroundColor: "#1e1e1e",
+    borderRadius: 10,
   },
   backButton: {
     flexDirection: "row",
