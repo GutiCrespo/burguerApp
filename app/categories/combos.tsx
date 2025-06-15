@@ -129,6 +129,7 @@ export default function Combos() {
       </TouchableOpacity>
       <H1>Combos</H1>
       <H2>A combinação perfeita para seu pedido!</H2>
+
       {combos.map((combo) => (
         <TouchableOpacity
           key={combo.id}
@@ -146,7 +147,7 @@ export default function Combos() {
           </Text>
         </TouchableOpacity>
       ))}
-      <View style={{ height: 50 }} />{" "}
+      <View style={{ height: 50 }} />
     </ScrollView>
   );
 }
