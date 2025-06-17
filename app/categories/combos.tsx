@@ -13,7 +13,6 @@ import {
   Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { useCart } from "../../context/CartContext";
 
 type ProductItem = {
   id: number;
@@ -37,7 +36,6 @@ export default function Combos() {
   const [combos, setCombos] = useState<Combo[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const { addToCart } = useCart();
 
   useEffect(() => {
     async function fetchData() {
@@ -52,7 +50,6 @@ export default function Combos() {
         );
         const drinksData: ProductItem[] = await drinksResponse.json();
 
-        // Encontra a batata "Byte Fries"
         const batata = burguersData.find((item) => item.name === "Byte Fries");
         const burguersFiltered = burguersData.filter(
           (item) => item.name !== "Byte Fries"
@@ -61,6 +58,10 @@ export default function Combos() {
         if (!batata) {
           console.warn("Batata 'Byte Fries' não encontrada!");
           setLoading(false);
+          Alert.alert(
+            "Erro",
+            "Item 'Byte Fries' não encontrado na API de burguers."
+          );
           return;
         }
 
@@ -96,12 +97,6 @@ export default function Combos() {
     fetchData();
   }, []);
 
-  const handleAddToCart = (combo: Combo) => {
-    addToCart(combo);
-    Alert.alert("Sucesso", `${combo.name} adicionado ao carrinho!`);
-    router.push("/cart");
-  };
-
   if (loading) {
     return (
       <View style={styles.center}>
@@ -134,7 +129,14 @@ export default function Combos() {
         <TouchableOpacity
           key={combo.id}
           style={styles.card}
-          onPress={() => handleAddToCart(combo)}
+          onPress={() =>
+            router.push({
+              pathname: "/combos-details",
+              params: {
+                combo: JSON.stringify(combo),
+              },
+            })
+          }
         >
           <Text style={styles.comboTitle}>{combo.name}</Text>
           <View style={styles.imagesRow}>

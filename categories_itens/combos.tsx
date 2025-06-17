@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import H1 from "@/components/H1";
 import H2 from "@/components/H2";
-import { Ionicons } from "@expo/vector-icons";
 import {
   View,
   Text,
@@ -10,8 +10,10 @@ import {
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { useCart } from "../context/CartContext";
 
 type Item = {
   id: number;
@@ -19,9 +21,12 @@ type Item = {
   price: number;
   photo: string;
   information: string;
+  description?: string;
 };
 
 type Combo = {
+  id: string;
+  name: string;
   burguer: Item;
   batata: Item;
   drink: Item;
@@ -29,11 +34,10 @@ type Combo = {
 };
 
 export default function Combos() {
-  const [burguers, setBurguers] = useState<Item[]>([]);
-  const [drinks, setDrinks] = useState<Item[]>([]);
   const [combos, setCombos] = useState<Combo[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     async function fetchData() {
@@ -54,15 +58,23 @@ export default function Combos() {
         );
 
         if (!batata) {
-          console.warn("Batata não encontrada!");
+          console.warn("Batata 'Byte Fries' não encontrada!");
           setLoading(false);
+          Alert.alert(
+            "Erro",
+            "Item 'Byte Fries' não encontrado na API de burguers."
+          );
           return;
         }
 
         const newCombos: Combo[] = [];
         for (const burguer of burguersFiltered) {
           for (const drink of drinksData) {
+            const comboId = `combo-${burguer.id}-${batata.id}-${drink.id}`;
+            const comboName = `${burguer.name} + ${batata.name} + ${drink.name}`;
             newCombos.push({
+              id: comboId,
+              name: comboName,
               burguer,
               batata,
               drink,
@@ -74,6 +86,10 @@ export default function Combos() {
         setCombos(newCombos);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
+        Alert.alert(
+          "Erro",
+          "Não foi possível carregar os combos. Tente novamente mais tarde."
+        );
       } finally {
         setLoading(false);
       }
@@ -107,15 +123,22 @@ export default function Combos() {
         <Ionicons name="arrow-back" size={24} color="#F9881F" />
         <Text style={styles.backText}>Voltar</Text>
       </TouchableOpacity>
-
       <H1>Combos</H1>
       <H2>A combinação perfeita para seu pedido!</H2>
-
-      {combos.map((combo, index) => (
-        <View key={index} style={styles.card}>
-          <Text style={styles.comboTitle}>
-            {combo.burguer.name} + {combo.batata.name} + {combo.drink.name}
-          </Text>
+      {combos.map((combo) => (
+        <TouchableOpacity
+          key={combo.id}
+          style={styles.card}
+          onPress={() =>
+            router.push({
+              pathname: "/combos-details",
+              params: {
+                combo: JSON.stringify(combo),
+              },
+            })
+          }
+        >
+          <Text style={styles.comboTitle}>{combo.name}</Text>
           <View style={styles.imagesRow}>
             <Image source={{ uri: combo.burguer.photo }} style={styles.image} />
             <Image source={{ uri: combo.batata.photo }} style={styles.image} />
@@ -124,8 +147,9 @@ export default function Combos() {
           <Text style={styles.price}>
             R$ {combo.totalPrice.toFixed(2)} (15% OFF)
           </Text>
-        </View>
+        </TouchableOpacity>
       ))}
+      <View style={{ height: 50 }} />{" "}
     </ScrollView>
   );
 }

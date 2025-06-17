@@ -1,29 +1,62 @@
-import { Pressable, StyleSheet, Text, ViewStyle, TextStyle, StyleProp } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  ViewStyle,
+  TextStyle,
+  StyleProp,
+  ActivityIndicator,
+} from "react-native";
+import React from "react";
 
 type Props = {
   title: string;
   onPress: () => void;
   variant?: string;
-  style?: StyleProp<ViewStyle>;     // container (Pressable)
-  textStyle?: StyleProp<TextStyle>; // texto (Text)
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  disabled?: boolean;
+  loading?: boolean;
 };
 
-export const Button = ({ title, onPress, variant, style, textStyle }: Props) => {
+export const Button = ({
+  title,
+  onPress,
+  variant,
+  style,
+  textStyle,
+  disabled = false,
+  loading = false,
+}: Props) => {
   const isLetters = variant === "letters";
+  const isDisabled = disabled || loading;
 
   return (
     <Pressable
       onPress={onPress}
-      style={[isLetters ? styles.textOnly : styles.button, style]}
+      disabled={isDisabled}
+      style={({ pressed }) => [
+        isLetters ? styles.textOnly : styles.button,
+        style,
+        isDisabled && styles.buttonDisabled,
+        pressed && !isDisabled && styles.buttonPressed,
+      ]}
     >
-      <Text style={[isLetters ? styles.textOnlyText : styles.buttonText, textStyle]}>
-        {title}
-      </Text>
+      {loading ? (
+        <ActivityIndicator color="#fff" />
+      ) : (
+        <Text
+          style={[
+            isLetters ? styles.textOnlyText : styles.buttonText,
+            textStyle,
+          ]}
+        >
+          {title}
+        </Text>
+      )}
     </Pressable>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   button: {
@@ -35,13 +68,19 @@ const styles = StyleSheet.create({
     minHeight: 56,
     justifyContent: "center",
     alignItems: "center",
-  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.23)",
     elevation: 4,
     marginBottom: 12,
     borderWidth: 1,
     borderColor: "rgba(255, 255, 255, 0.1)",
     flexDirection: "row",
     gap: 8,
+  },
+  buttonPressed: {
+    opacity: 0.8,
+  },
+  buttonDisabled: {
+    backgroundColor: "#555555",
+    opacity: 0.6,
   },
   buttonText: {
     fontSize: 18,
@@ -52,8 +91,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     includeFontPadding: false,
   },
-
-  // Estilo "letters"
   textOnly: {
     backgroundColor: "transparent",
     paddingVertical: 8,
