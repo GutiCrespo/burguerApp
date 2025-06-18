@@ -79,7 +79,6 @@ export default function Menu() {
       </H2>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Seção de Burgers */}
         <Text style={styles.sectionTitle}>Burgers</Text>
         {burguers.map((burguer) => (
           <TouchableOpacity
@@ -108,7 +107,6 @@ export default function Menu() {
           </TouchableOpacity>
         ))}
 
-        {/* Seção de Drinks */}
         <Text style={styles.sectionTitle}>Bebidas</Text>
         {drinks.map((drink) => (
           <TouchableOpacity
@@ -146,6 +144,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#121212",
+  },
+
+  logoutButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
   },
   loadingContainer: {
     flex: 1,

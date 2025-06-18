@@ -1,7 +1,40 @@
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
+import { Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage"; // Certifique-se de ter esta importação
 
 export default function TabLayout() {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    Alert.alert(
+      "Deslogar",
+      "Tem certeza que deseja sair da sua conta?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Sair",
+          onPress: async () => {
+            try {
+              await AsyncStorage.removeItem("userToken");
+              router.replace("/");
+            } catch (e) {
+              console.error("Erro ao deslogar:", e);
+              Alert.alert(
+                "Erro",
+                "Não foi possível deslogar. Tente novamente."
+              );
+            }
+          },
+        },
+      ],
+      { cancelable: true }
+    );
+  };
+
   return (
     <Tabs
       screenOptions={{
@@ -48,6 +81,21 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <FontAwesome name="info-circle" size={24} color={color} />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="logout"
+        options={{
+          title: "Sair",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="sign-out" size={24} color={color} />
+          ),
+        }}
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault();
+            handleLogout();
+          },
         }}
       />
     </Tabs>
