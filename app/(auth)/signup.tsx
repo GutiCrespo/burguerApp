@@ -11,6 +11,9 @@ import {
   SafeAreaView,
   Alert,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from "react-native";
 import { API_BASE_URL } from "@env";
 
@@ -69,7 +72,7 @@ export default function CadastroCliente() {
           "Sucesso",
           "Cadastro realizado com sucesso! Agora você pode fazer login."
         );
-        router.navigate("./login"); // Navega para a tela de login
+        router.navigate("./login");
       } else {
         const errorMessage =
           data.erro || "Ocorreu um erro no cadastro. Tente novamente.";
@@ -82,102 +85,117 @@ export default function CadastroCliente() {
         "Não foi possível conectar ao servidor. Verifique sua conexão ou tente novamente mais tarde."
       );
     } finally {
-      setLoading(false); // Desativa o indicador de carregamento sempre
+      setLoading(false);
     }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.form}>
-        <H1>CompiLanche</H1>
-        <H2>
-          Configure seu perfil e instale o apetite. O CompLanche vai compilar
-          seu lanche ideal!
-        </H2>
+    <KeyboardAvoidingView
+      style={{ flex: 1, backgroundColor: "#121212" }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <ScrollView
+        style={{ flex: 1, backgroundColor: "#121212" }}
+        contentContainerStyle={styles.scrollContainer}
+        keyboardShouldPersistTaps="handled"
+      >
+        <SafeAreaView style={styles.container}>
+          <View style={styles.form}>
+            <H1>CompiLanche</H1>
+            <H2>
+              Configure seu perfil e instale o apetite. O CompLanche vai
+              compilar seu lanche ideal!
+            </H2>
 
-        <View style={styles.field}>
-          <Text style={styles.label}>Nome</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Digite seu nome"
-            placeholderTextColor=""
-            value={nome}
-            onChangeText={setNome}
-            editable={!loading}
-          />
-        </View>
+            <View style={styles.field}>
+              <Text style={styles.label}>Nome</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Digite seu nome"
+                placeholderTextColor="#999"
+                value={nome}
+                onChangeText={setNome}
+                editable={!loading}
+              />
+            </View>
 
-        <View style={styles.field}>
-          <Text style={styles.label}>Telefone</Text>
-          <TextInput
-            style={styles.input}
-            placeholder=""
-            placeholderTextColor=""
-            keyboardType="phone-pad"
-            value={telefone}
-            onChangeText={setTelefone}
-            editable={!loading}
-          />
-        </View>
+            <View style={styles.field}>
+              <Text style={styles.label}>Telefone</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="(xx) xxxxx-xxxx"
+                placeholderTextColor="#999"
+                keyboardType="phone-pad"
+                value={telefone}
+                onChangeText={setTelefone}
+                editable={!loading}
+              />
+            </View>
 
-        <View style={styles.field}>
-          <Text style={styles.label}>Senha</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Digite sua senha"
-            placeholderTextColor=""
-            secureTextEntry
-            value={senha}
-            onChangeText={setSenha}
-            editable={!loading}
-          />
-        </View>
+            <View style={styles.field}>
+              <Text style={styles.label}>Senha</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Digite sua senha"
+                placeholderTextColor="#999"
+                secureTextEntry
+                value={senha}
+                onChangeText={setSenha}
+                editable={!loading}
+              />
+            </View>
 
-        <View style={styles.field}>
-          <Text style={styles.label}>Confirmar Senha</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Confirme sua senha"
-            placeholderTextColor=""
-            secureTextEntry
-            value={confirmarSenha}
-            onChangeText={setConfirmarSenha}
-            editable={!loading}
-          />
-        </View>
+            <View style={styles.field}>
+              <Text style={styles.label}>Confirmar Senha</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Confirme sua senha"
+                placeholderTextColor="#999"
+                secureTextEntry
+                value={confirmarSenha}
+                onChangeText={setConfirmarSenha}
+                editable={!loading}
+              />
+            </View>
 
-        <Button
-          title={loading ? "Cadastrando..." : "Criar Conta"}
-          onPress={handleSubmit}
-          disabled={loading}
-        />
+            <Button
+              title={loading ? "Cadastrando..." : "Criar Conta"}
+              onPress={handleSubmit}
+              disabled={loading}
+            />
 
-        {loading && (
-          <ActivityIndicator
-            size="small"
-            color="#F9881F"
-            style={styles.loadingIndicator}
-          />
-        )}
+            {loading && (
+              <ActivityIndicator
+                size="small"
+                color="#F9881F"
+                style={styles.loadingIndicator}
+              />
+            )}
 
-        <Text style={styles.h31}>Já possui cadastro?</Text>
-        <View style={{ alignItems: "center" }}>
-          <Link href="/(auth)/login">
-            <Text>Entrar</Text>
-          </Link>
-        </View>
-      </View>
-    </SafeAreaView>
+            <Text style={styles.h31}>Já possui cadastro?</Text>
+            <View style={{ alignItems: "center" }}>
+              <Link href={"/(auth)/login"}>
+                <Text style={styles.h32}>Acesse sua conta.</Text>
+              </Link>
+            </View>
+          </View>
+        </SafeAreaView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
   container: {
     flex: 1,
     backgroundColor: "#121212",
-    justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    justifyContent: "center",
   },
   form: {
     backgroundColor: "#1f1f1f",
@@ -187,14 +205,12 @@ const styles = StyleSheet.create({
   },
   h3: {
     fontSize: 13,
-    // fontFamily: "Montserrat",
     color: "#FFFFFF",
     marginBottom: 20,
     marginTop: 5,
   },
   h31: {
     fontSize: 13,
-    // fontFamily: "Montserrat",
     color: "#FFFFFF",
     marginBottom: 5,
     marginTop: 5,
@@ -202,7 +218,6 @@ const styles = StyleSheet.create({
   },
   h32: {
     fontSize: 13,
-    // fontFamily: "Montserrat",
     color: "#f9881f",
     marginBottom: 20,
     textDecorationLine: "underline",
