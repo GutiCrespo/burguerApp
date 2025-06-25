@@ -27,7 +27,7 @@ Este projeto foi desenvolvido com fins acadêmicos e didáticos, servindo como u
 
 1.  Clone o repositório:
     ```bash
-    git clone git@github.com:GutiCrespo/burguerApp.git
+    git clone https://github.com/GutiCrespo/burguerApp.git
     cd burguerApp
     ```
 
