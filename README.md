@@ -1,50 +1,80 @@
-# Welcome to your Expo app 👋
+# CompiLanche
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+O CompiLanche é um aplicativo mobile desenvolvido com **React Native** e **Expo SDK 53**, criado para simular um sistema de pedidos de hambúrgueres. Ele explora conceitos como navegação por abas com **Expo Router**, estilização com **TailwindCSS** via **NativeWind**, e controle de estado para gerenciar o carrinho de compras.
 
-## Get started
+Este projeto foi desenvolvido com fins acadêmicos e didáticos, servindo como uma vitrine técnica e uma base para futuras evoluções.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## Funcionalidades
 
-2. Start the app
+* **Autenticação**: Telas de Login e Cadastro.
+* **Navegação por Abas**: Interface moderna com navegação intuitiva.
+* **Carrinho de Compras**: Adição e remoção de itens.
+* **Componentes Reutilizáveis**: Botões, cabeçalhos, inputs e layouts consistentes.
 
-   ```bash
-    npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## Como Rodar o Projeto
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Pré-requisitos
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+* Node.js versão 18.x ou superior
+* npm instalado
+* Aplicativo Expo Go no seu smartphone ([App Store](https://apps.apple.com/us/app/expo-go/id1394474758) / [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent))
 
-## Get a fresh project
+### Passo a passo
 
-When you're ready, run:
+1.  Clone o repositório:
+    ```bash
+    git clone https://github.com/GutiCrespo/burguerApp.git
+    cd burguerApp
+    ```
 
-```bash
-npm run reset-project
-```
+2.  Instale as dependências:
+    ```bash
+    npm install --legacy-peer-deps
+    ```
+    Esse comando é necessário para evitar conflitos entre versões do React e bibliotecas de teste, como `react-test-renderer`.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+3.  Inicie o servidor de desenvolvimento:
+    ```bash
+    npx expo start --clear
+    ```
+    Um QR Code será exibido no terminal. Escaneie com o app Expo Go no seu celular.
 
-## Learn more
+    **Dica**: Se o app não carregar, feche completamente o Expo Go e escaneie novamente.
 
-To learn more about developing your project with Expo, look at the following resources:
+---
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Observações de Compatibilidade
 
-## Join the community
+Este projeto foi configurado especificamente para o **Expo SDK 53**, com ajustes no ambiente para garantir estabilidade:
 
-Join our community of developers creating universal apps.
+* As versões das dependências estão fixadas no `package.json` para evitar erros de compatibilidade.
+* O plugin `react-native-reanimated/plugin` já está incluído no `babel.config.js`.
+* Parâmetros instáveis foram removidos do `app.json`, como `newArchEnabled` e `experiments.typedRoutes`.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+**Dica**: Caso enfrente erros de instalação, sempre utilize `npm install --legacy-peer-deps`.
+
+---
+
+## Tecnologias Utilizadas
+
+* **React Native** – Desenvolvimento mobile com foco em performance
+* **Expo SDK 53** – Build e debug simplificados para apps React Native
+* **Expo Router (v5.1.0)** – Sistema de navegação baseado em arquivos
+* **TypeScript** – Tipagem estática para maior segurança no código
+* **TailwindCSS via NativeWind** – Estilização com classes utilitárias
+* **Hermes** – Motor JavaScript leve, otimizado para Android
+* `@react-native-async-storage/async-storage` – Persistência local de dados
+* `react-native-dotenv` – Uso de variáveis ambiente no app
+* `react-native-reanimated (v3.17.5)` – Animações fluidas e responsivas
+
+---
+
+## Melhorias Futuras
+
+* Integração com uma API real para gerenciamento de pedidos
+* Tela de histórico de pedidos
+* Área administrativa para controle do cardápio
