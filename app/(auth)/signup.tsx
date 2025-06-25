@@ -19,7 +19,7 @@ export default function CadastroCliente() {
   const [telefone, setTelefone] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
-  const [loading, setLoading] = useState(false); // Estado para controlar o carregamento
+  const [loading, setLoading] = useState(false);
 
   const API_REGISTER_URL = `${API_BASE_URL}/clientes`;
 
@@ -162,8 +162,8 @@ export default function CadastroCliente() {
 
         <Text style={styles.h31}>Já possui cadastro?</Text>
         <View style={{ alignItems: "center" }}>
-          <Link href={"/(auth)/login"}>
-            <Text style={styles.h32}>Acesse sua conta.</Text>
+          <Link href="/(auth)/login">
+            <Text>Entrar</Text>
           </Link>
         </View>
       </View>

@@ -5,15 +5,18 @@
     "jsx": "react-native",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@env": ["./.env"]
+      "@/*": [
+        "./*"
+      ],
+      "@env": [
+        "./.env"
+      ]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts",
-    "nativewind-env.d.ts"
+    "nativewind-env.d.ts",
+    "index.js"
   ]
 }

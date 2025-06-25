@@ -31,8 +31,11 @@ export default function Screen() {
         <Text style={styles.h3}> cadastre aqui </Text>
       </Link> */}
 
-      <Button title="Cadastre aqui" variant="letters" onPress={() => router.push("/(auth)/signup")} />
-
+      <Button
+        title="Cadastre aqui"
+        variant="letters"
+        onPress={() => router.push("/(auth)/signup")}
+      />
     </SafeAreaView>
   );
 }
@@ -58,6 +61,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   h2: {
-    width: '80%'
-  }
+    width: "80%",
+  },
 });
